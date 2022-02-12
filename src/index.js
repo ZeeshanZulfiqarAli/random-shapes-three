@@ -1,17 +1,14 @@
-import * as THREE from 'three'
 
 /*
 Options
-    material - This will be used for the shape
     faceVertices - This will be used as a starting point for the shape
     maxVertices - integer - this will indicate the maximum number of integers the random shape could have.
                     This has to be greater than 3.
     buffer - array of length 3 - denotes buffer for x, y and z axis.
-Returns Mesh of random shape
+Returns Obj of vertices and indices
 */
 export default function getRandomShape(options) {
     const {
-        material,
         faceVertices,
         maxVertices,
         buffer
@@ -47,19 +44,14 @@ export default function getRandomShape(options) {
     }
 
     vertices = new Float32Array(vertices);
-    const geometry = new THREE.BufferGeometry();
+    
 
-    geometry.setIndex(indices);
-    geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-    geometry.computeVertexNormals();
-    geometry.normalizeNormals();
+    
 
-    const mesh = new THREE.Mesh(
-        geometry,
-        material
-    );
-
-    return mesh;
+    return {
+        vertices,
+        indices, 
+    };
 
     function processVertex(faceVertices, faceIndices, newIndex) {
         let minX, maxX, minY, maxY, minZ, maxZ;

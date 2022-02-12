@@ -1,7 +1,8 @@
 const { merge } = require('webpack-merge')
 const commonConfiguration = require('./webpack.common.js')
-const ip = require('internal-ip')
+const ip = import('internal-ip')
 const portFinderSync = require('portfinder-sync')
+const path = require('path')
 
 const infoColor = (_message) =>
 {
@@ -12,6 +13,7 @@ module.exports = merge(
     commonConfiguration,
     {
         mode: 'development',
+        entry: path.resolve(__dirname, '../demo/script.js'),
         devServer:
         {
             host: '0.0.0.0',
@@ -24,11 +26,13 @@ module.exports = merge(
             disableHostCheck: true,
             overlay: true,
             noInfo: true,
-            after: function(app, server, compiler)
+            after: async function(app, server, compiler)
             {
+                let x = await ip;
+
                 const port = server.options.port
                 const https = server.options.https ? 's' : ''
-                const localIp = ip.v4.sync()
+                const localIp = x.internalIpV4Sync();
                 const domain1 = `http${https}://${localIp}:${port}`
                 const domain2 = `http${https}://localhost:${port}`
                 

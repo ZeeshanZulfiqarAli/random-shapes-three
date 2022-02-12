@@ -49,10 +49,21 @@ const updateRandomShapes = () => {
         scene.remove(oldRandomShapes);
     }
 
-    const shape = getRandomShape(params);
-    shape.name = params.name;
+    const {vertices, indices} = getRandomShape(params);
 
-    scene.add(shape);
+    const geometry = new THREE.BufferGeometry();
+    geometry.setIndex(indices);
+    geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+    geometry.computeVertexNormals();
+    geometry.normalizeNormals();
+
+    const shapeMesh = new THREE.Mesh(
+        geometry,
+        params.material
+    );
+    shapeMesh.name = params.name;
+
+    scene.add(shapeMesh);
 }
 
 const createBaseBoxMesh = () => {
