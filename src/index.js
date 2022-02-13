@@ -32,15 +32,15 @@ export default function getRandomShape(options) {
 
         const randomFaceIndices = indices.slice(randomFaceIdx*3, (randomFaceIdx*3)+3);
         const randomFaceVertices = [
-            vertices[randomFaceIndices[0]],
-            vertices[randomFaceIndices[0]+1],
-            vertices[randomFaceIndices[0]+2],
-            vertices[randomFaceIndices[1]],
-            vertices[randomFaceIndices[1]+1],
-            vertices[randomFaceIndices[1]+2],
-            vertices[randomFaceIndices[2]],
-            vertices[randomFaceIndices[2]+1],
-            vertices[randomFaceIndices[2]+2],
+            vertices[(randomFaceIndices[0]*3)],
+            vertices[(randomFaceIndices[0]*3)+1],
+            vertices[(randomFaceIndices[0]*3)+2],
+            vertices[(randomFaceIndices[1]*3)],
+            vertices[(randomFaceIndices[1]*3)+1],
+            vertices[(randomFaceIndices[1]*3)+2],
+            vertices[(randomFaceIndices[2]*3)],
+            vertices[(randomFaceIndices[2]*3)+1],
+            vertices[(randomFaceIndices[2]*3)+2],
         ];
 
         const { subVertices, subIndices } = processVertex(randomFaceVertices, randomFaceIndices, vertices.length / 3);
