@@ -38,7 +38,8 @@ const params = {
     }),
     faceVertices,
     maxVertices: 40,
-    buffer: [6, 1, 3],
+    buffer: [6, 1, 3], // TODO: add buffer to dat.gui
+    randomness: [0.5, 0.5, 0.5], // TODO: add randomness to dat.gui
     name: 'random_shape',
 }
 

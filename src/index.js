@@ -5,13 +5,15 @@ Options
     maxVertices - integer - this will indicate the maximum number of integers the random shape could have.
                     This has to be greater than 3.
     buffer - array of length 3 - denotes buffer for x, y and z axis.
+    randomness - array of length 3 - used to specify the amount of randomess 
 Returns Obj of vertices and indices
 */
 export default function getRandomShape(options) {
     const {
         faceVertices,
         maxVertices,
-        buffer
+        buffer,
+        randomness
     } = options;
 
     if (maxVertices<=3) {
@@ -92,9 +94,9 @@ export default function getRandomShape(options) {
         maxY += bufferY;
         maxZ += bufferZ;
 
-        const randomX = Math.random() * (maxX - minX + 1) + minX,
-            randomY = Math.random() * (maxY - minY + 1) + minY,
-            randomZ = Math.random() * (maxZ - minZ + 1) + minZ;
+        const randomX = (Math.random() * (maxX - minX + 1) + minX) * randomness[0],
+            randomY = (Math.random() * (maxY - minY + 1) + minY) * randomness[1],
+            randomZ = (Math.random() * (maxZ - minZ + 1) + minZ) * randomness[2];
 
         const vertices = [randomX, randomY, randomZ];
         const [i1, i2, i3] = faceIndices;
